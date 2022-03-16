@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Show Info</title>
+  </head>
+  <body>
+    <h1>Show Info</h1>
+    <div>
+      <img src="{% static 'logos/men1.png' %}" alt="">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+              <table class="table">
+                  <thead>
+                    <tr class="bg-info">
+                      <th class="text-left">Matricule</th>
+                      <th class="text-left">Image</th>
+                      <th class="text-left">Name</th>
+                      <th class="text-left">Date Naiss</th>
+                      <th class="text-left">Lieu Naiss</th>
+                      <th class="text-left">Classe</th>
+                      <th class="text-left">Absences</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                  {% for student in students %}
+
+                      <tr>
+                          <td>{{ student.matricule }}</td>
+                          <td> <img height="60px" width="50px" src="{{ student.student_photo.path }}"/></td>
+                          <td>{{ student.nomComplet }}</td>
+                          <td>{{ student.dateNaissance }}</td>
+                          <td>{{ student.lieuNaissance }}</td>
+                          <td style="color: blueviolet; margin: 5px">{{ student.affectations.last.classe }}</td>
+                          <td>{{ student.absence_set.count }}</td>
+                      </tr>
+
+                    {% endfor %}
+                  
+                  </tbody>
+              </table>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  </body>
+</html>

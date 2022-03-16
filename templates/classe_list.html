@@ -1,0 +1,12 @@
+{% for classe in classes %}
+<tr id="classe-{{ classe.pk }}" class="classe-row">
+  <td>{{ classe.refClasse }}</td>
+  <td>{{ classe.libClasse }}</td>
+  <td>{{ classe.nbTables }}</td>
+  <td>{{ classe.profPrincipal }}</td>
+  <td>
+    <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_classe' pk=classe.pk %}" hx-target="#dialog">Edit</button>
+    <a href="#" class="btn btn-info btn-sm" >Liste</a>
+  </td>
+</tr>
+{% endfor %}

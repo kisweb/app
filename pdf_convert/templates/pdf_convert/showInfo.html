@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block content%}
+
+{% load static %}
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div>
+                <img src="{% static 'logos/men1.png' %}" alt="">
+              </div>
+                <h1>Report Of Students</h1>
+                <a class="btn btn-primary m-2" href="{% url 'create-pdf' %}">Create PDF</a>
+            </div>
+            <div class="col-md-12">
+
+                <table class="table table-striped">
+                    <thead>
+                      <tr class="bg-dark text-white font-bold">
+                        <th class="text-left">Matricule</th>
+                        <th class="text-left">Image</th>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Date Naiss</th>
+                        <th class="text-left">Lieu Naiss</th>
+                        <th class="text-left">Classe</th>
+                        <th class="text-left">Absences</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                     {% for student in students %}
+
+                        <tr>
+                            <td>{{ student.matricule }}</td>
+                            <td> <img height="50px" width="50px" src="{{ student.student_photo.url }}"/></td>
+                            <td>{{ student.nomComplet }}</td>
+                            <td>{{ student.dateNaissance|date:'d-m-Y' }}</td>
+                            <td>{{ student.lieuNaissance }}</td>
+                            <td style="color: blueviolet; margin: 5px">{{ student.affectations.last.classe }}</td>
+                            <td>{{ student.absence_set.count }}</td>
+                        </tr>
+
+                      {% endfor %}
+                     
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        
+
+{% endblock content%}

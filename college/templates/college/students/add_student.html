@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+{% block content%}
+
+    {%load crispy_forms_tags %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-1">Ajouter un élève</h3></div>
+                    <div class="card-body">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token%}
+                            <div class="row mb-3">
+
+                                <div class="col-md-6 mx-auto form-group">
+                                    {{ form|crispy }}
+                                </div>
+
+                            </div>
+                            <div class="mt-4 mb-0">
+                               <input class="btn btn-primary" type="submit" value="Enregister">                                
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</center>
+    
+{% endblock %}
