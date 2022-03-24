@@ -11,10 +11,17 @@ from . utils import searchStudents, paginateStudents
 from .models import *
 from .forms import ClasseForm, StudentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import requests
 
 
 def home(request):
     return render(request, 'college/home.html', {'page': "Gestion des absences"})
+
+
+def params(request):
+    return {
+        'params': Parametrage.objects.first()
+    }
 
 
 def lesclasses(request):
@@ -25,7 +32,6 @@ def lesclasses(request):
 
 def classe(request):
     return render(request, 'index.html', {'page': "Classes"})
-
 
 
 def add_classe(request):
@@ -93,7 +99,6 @@ def show_students(request):
     return render(request, 'college/pdf/showInfo.html', context)
 
 
-
 def pdf_report_create(request):
     students = Student.objects.all()
 
@@ -116,11 +121,6 @@ def pdf_report_create(request):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
-
-
-
-
-
 
 
 def classe_list(request):
@@ -229,6 +229,15 @@ def remove_student(request, pk):
 
 def certificat(request, pk):
     student = get_object_or_404(Student, pk=pk)
+    params = Parametrage.objects.first()
+    
     return render(request, 'college/students/certificat.html', {
         'student': student,
+        'params': params,
     })
+
+
+def displaydata(request):
+    callapi = requests.get('https://dev.h2prog.com/API_TEST/formations')
+    results = callapi.json()
+    return render(request, 'college/formations/liste.html',{'formations': results})

@@ -6,7 +6,7 @@
   <td>{{ classe.profPrincipal }}</td>
   <td>
     <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_classe' pk=classe.pk %}" hx-target="#dialog">Edit</button>
-    <a href="#" class="btn btn-info btn-sm" >Liste</a>
+    <a href="{% url 'showStudents' %}?classe={{ classe.refClasse }}" class="btn btn-info btn-sm" >Liste</a>
   </td>
 </tr>
 {% endfor %}
